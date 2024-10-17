@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 
-// define a node struct
+// define a node structure
 typedef struct node { 
 int key;
 struct node* rightChild  ; 
@@ -16,13 +16,10 @@ node * createNode (int val){
 
     node* E = (node*)malloc(sizeof(node ));
 
-    
         E->key= val;
         E->rightChild = E->leftChild = NULL;
         
-        return E;
-
-     
+        return E;     
 }
 
 
@@ -38,8 +35,6 @@ void insert( node ** root ,int val  ){
         
         *root=N; 
         return ;
-        
-
     }
 
     // if root is not NULL
@@ -47,7 +42,6 @@ void insert( node ** root ,int val  ){
 
     while(1){
 
-    
         //we compare val to the node.key where temp in pointing to
         if (val > temp->key){
 
@@ -56,13 +50,10 @@ void insert( node ** root ,int val  ){
 
                 //we assign it the new node
                 temp->rightChild= N;
-                break;
-                
-            }
-            else {
+                break;      
+            } else {
                 temp= temp->rightChild;
             }
-
         }
         else {
 
@@ -76,7 +67,6 @@ void insert( node ** root ,int val  ){
             else temp=temp->leftChild;
         }
     }
-
 }
 
 
@@ -87,7 +77,6 @@ void preorder( node *root){
 
     if (root== NULL) return;
     printf("%d\t", root->key);
-
     preorder(root->leftChild);
     preorder(root->rightChild);
 }
@@ -96,15 +85,11 @@ void inorder(node * root){
        // this function traverses the BST using inorder algortithm 
        // leftChild => root => rightChild
 
-    if (root== NULL) return;
-    
+    if (root== NULL) return; 
 
     inorder(root->leftChild);
     printf("%d\t", root->key);
-
     inorder(root-> rightChild);
-     
-    
 }
 
 void postorder(node * root){
@@ -112,11 +97,7 @@ void postorder(node * root){
        // leftChild => rightChild => root
 
     if (root== NULL) return;
-    
-
     postorder(root->leftChild);
-    
-
     postorder(root-> rightChild);
     printf("%d\t", root->key); 
     
@@ -126,7 +107,7 @@ void postorder(node * root){
 node*  max( node * root){
     node * temp;
     if (root == NULL ) return NULL;
-     temp= root;
+    temp= root;
 
     while(temp->rightChild) {
         temp=temp->rightChild;
@@ -144,8 +125,7 @@ node * min( node * root){
     temp= root ; 
     while(temp->leftChild){
         temp=temp->leftChild;
-    }
-    
+    }  
     return temp;
 }
 
@@ -154,7 +134,6 @@ node* search( node * root, int val  ){
 
     node * temp;
     if (root == NULL) return NULL;
-        
 
     temp= root ; 
     while( temp ){
@@ -167,9 +146,6 @@ node* search( node * root, int val  ){
         else return temp;
     }
     return NULL;
-
-    
-
 }
 
 //this function deletes a node based on it key
@@ -186,42 +162,38 @@ node* deleteNode(node * root, int val ){
         if (!root->leftChild && !root->rightChild ){
             free(root );
             root=NULL;
-
         }     
         //the node to delete has only a leftChild
         else{
 
-         if (root->rightChild==NULL){
-            node* temp = root;
-            root= root->leftChild;
-            free(temp);
-        }
-        // the node to delete has two children
-       
-        else if(temp->rightChild && temp->leftChild) {
-            node * temp = min(root->rightChild);
-            root->key= temp->key;
-            root->rightChild= deleteNode(root->rightChild, temp->key);
-        }
-        //has only a right child
-        else {
-            node* temp =root;
-            root= root->rightChild;
-            free(temp);
-        }    
-        }
+            if (root->rightChild==NULL){
+                node* temp = root;
+                root= root->leftChild;
+                free(temp);
+            }
+            // the node to delete has two children
         
+            else if(temp->rightChild && temp->leftChild) {
+                node * temp = min(root->rightChild);
+                root->key= temp->key;
+                root->rightChild= deleteNode(root->rightChild, temp->key);
+            }
+            //has only a right child
+            else {
+                node* temp =root;
+                root= root->rightChild;
+                free(temp);
+            }    
+        }    
     }
 
     // we compare val to root's key 
     else if (val < root->key){
         //we call deleteNode with the same val and root->leftChild as new root
         root->leftChild= deleteNode(root->leftChild, val);
-
     }
     //we call deleteNode with the same val and root->rightChild as new root
     else root->rightChild= deleteNode(root->rightChild, val);
-
 }
 
 
@@ -259,146 +231,8 @@ void main(){
     node* p=search(tree, 13);
     if (p==NULL) printf("la valeur n'existe pas\n ");
     else printf("la valeur existe a l'adressse %p\n",p);
-
     
-
     deleteNode(tree, 23);
     printf("\n la parcours prefixe est : \t");
     inorder(tree);
-
-
-   
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
